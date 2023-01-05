@@ -16,7 +16,6 @@ struct LittleLemonLogo: View {
             Text("LITTLE LEMON")
                 .font(.custom("Noteworthy Light", size: 28))
                 .foregroundColor(Color("ColorType1"))
-            
         }
     }
 }

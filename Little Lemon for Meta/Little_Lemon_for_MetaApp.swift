@@ -11,7 +11,7 @@ import SwiftUI
 struct Little_Lemon_for_MetaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }

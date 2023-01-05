@@ -7,56 +7,49 @@
 
 import SwiftUI
 
-struct LocationView: View {
-    
+struct LocationsView: View {
     @EnvironmentObject var model: Model
     
     var body: some View {
-        ZStack {
-            Color("BackgroundColor")
-                .ignoresSafeArea()
+        
+        
+        VStack {
+            LittleLemonLogo()
+                .padding(.top, 50)
             
-            VStack {
-                LittleLemonLogo()
-                
-                
-                Text(model.displayingReservationForm ? "Reservation Details" : "Select a location" )
-                    .padding([.leading, .trailing], 40)
-                    .padding([.top, .bottom], 8)
-                    .background(Color("ColorType2"))
-                    .foregroundColor(Color("ColorType1"))
-                    .cornerRadius(20)
-                
-                NavigationView {
-                    
-                    List(model.restaurants, id: \.self) {restaurant in
-                        NavigationLink(destination: MainView()) {
-                            RestaurantView(restaurant: restaurant)
-                        }.listRowBackground(Color("ColorType2"))
+            Text(model.displayingReservationForm ? "Reservation Details" : "Select a location")
+                .padding([.leading, .trailing], 40)
+                .padding([.top, .bottom], 8)
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(20)
+            
+            NavigationView {
+                List(model.restaurants, id: \.self) { restaurant in
+                    NavigationLink(destination: ReservationForm(restaurant)) {
+                        RestaurantView(restaurant)
                     }
-                    .background(Color("BackgroundColor"))
-                    .scrollContentBackground(.hidden)
-                    .navigationTitle("")
-                    .toolbar(.hidden)
                 }
-                .onDisappear {
-                    if model.tabBarChanged { return }
-                    model.displayingReservationForm = true
-                }
-                
-                
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
             }
+            .onDisappear{
+                if model.tabBarChanged { return }
+                model.displayingReservationForm = true
+            }
+            .frame(maxHeight: .infinity)
+            .padding(.top, -10)
             
+            // makes the list background invisible, default is gray
             
-            
-            
+            .scrollContentBackground(.hidden)
             
         }
+        
     }
 }
 
-struct LocationView_Previews: PreviewProvider {
+struct LocationsView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationView().environmentObject(Model())
+        LocationsView().environmentObject(Model())
     }
 }

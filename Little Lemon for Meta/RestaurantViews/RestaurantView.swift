@@ -2,16 +2,15 @@
 //  RestaurantView.swift
 //  Little Lemon for Meta
 //
-//  Created by Oleksandr Smakhtin on 05.01.2023.
+//  Created by Oleksandr Smakhtin on 06.01.2023.
 //
 
 import SwiftUI
 
 struct RestaurantView: View {
+    private var restaurant: RestaurantLocation
     
-    let restaurant: Restaurant
-    
-    init(restaurant: Restaurant) {
+    init(_ restaurant: RestaurantLocation) {
         self.restaurant = restaurant
     }
     
@@ -19,7 +18,6 @@ struct RestaurantView: View {
         VStack(alignment: .leading, spacing: 3) {
             Text(restaurant.city)
                 .font(.title2)
-                .foregroundColor(Color("ColorType1"))
             
             HStack {
                 Text(restaurant.neighborhood)
@@ -27,16 +25,17 @@ struct RestaurantView: View {
                 Text(restaurant.phoneNumber)
             }
             .font(.caption)
-            .foregroundColor(Color("ColorType1"))
-            
-            
         }
     }
 }
 
+
+
+
 struct RestaurantView_Previews: PreviewProvider {
     static var previews: some View {
-        let temp = Restaurant(city: "New York", neighborhood: "Downtown", phoneNumber: "+1937457388")
-        RestaurantView(restaurant: temp)
+        let sampleRestaurant = RestaurantLocation(city: "Las Vegas", neighborhood: "Downtown", phoneNumber: "(702) 555-9898")
+        RestaurantView(sampleRestaurant)
     }
 }
+
